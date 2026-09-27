@@ -57,6 +57,9 @@ Core dependencies: `numpy`, `scipy`, `pandas`, `scikit-learn`, `matplotlib`,
 | LaTeX tables (booktabs) | `python make_table_R15.py` | `table_R15_cwru.tex`, `table_R15_huang.tex`, `table_R15_xjtu.tex` |
 | Figure 1 (synthetic validation) | `python make_figure1.py` | `figure1.pdf` |
 | Figure "XJTU trajectories" | `python make_figure_xjtu.py` | `figure_xjtu.pdf` |
+| R1.9 numerical equivalence (C vs Python) | `python r19_equivalence.py` | prints DWT / energy / score errors |
+| R1.9 on-silicon test vectors (N=4096) | `python make_test_vectors_n4096.py --cwru_dir <CWRU>` | `test_vectors.npz`, `constants.h`, `detector_params_n4096.json` |
+| R1.9 on-silicon injection | `python uart_inject.py --port COM4 --vectors test_vectors.npz` | compares STM32 `z_max`/`v*` vs Python |
 
 The revision additions map to reviewer comments as follows: R1.2 (switching
 protocol) → `r12_rho_analysis.py`; R1.3 (extended Table 1 over the
@@ -66,6 +69,12 @@ R1.5 (baseline comparison) → `run_baselines_*.py` + `make_table_R15.py`.
 
 Notes:
 
+- **On-silicon equivalence (R1.9).** `make_test_vectors_n4096.py` regenerates a
+  CWRU `E_REF` and `test_vectors.npz` at N=4096; the resulting `constants.h` must
+  replace the firmware's `Core/Inc/constants.h` before flashing (the firmware
+  header currently holds a *USB-fan* reference, not the CWRU reference). Then
+  `uart_inject.py --port COM4` sends each segment and checks `z_max`/`v*` against
+  the Python oracle (tolerance 0.5%, `v*` exact).
 - `run_baselines_cwru.py` runs the full kurtogram at `max_level=6` by default
   (~6–7 minutes). `--quick` limits to one configuration for a smoke test.
 - `run_baselines_xjtu.py` excludes `Bearing3_5` (insufficient initial reference,
