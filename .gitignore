@@ -7,6 +7,9 @@ table_R15_huang.tex
 table_R15_xjtu.tex
 table_extended1.tex
 extended_table1.csv
+test_vectors.npz
+constants.h
+detector_params_n4096.json
 results_baselines_cwru.csv
 results_baselines_huang.csv
 results_baselines_xjtu.csv
