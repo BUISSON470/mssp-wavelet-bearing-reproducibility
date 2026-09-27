@@ -126,8 +126,8 @@ def run(port, vectors_path, verbose, dry_run):
 
     results = []
     with serial.Serial(port, BAUD, timeout=TIMEOUT_S) as ser:
-        ser.reset_input_buffer()
-        time.sleep(0.1)
+        time.sleep(1.0)            # laisser le firmware booter et émettre sa bannière
+        ser.reset_input_buffer()   # purger la bannière
         for i in range(n):
             ser.write(build_request(segments[i]))
             raw = ser.read(RESP_SIZE)
