@@ -107,7 +107,9 @@ def main():
         f.write(",\n".join(f"    {v:.10e}f  /* j={i+1} */" for i, v in enumerate(E_ref)))
         f.write("\n};\n\n")
         f.write(f"static const float DET_THRESHOLD = {thr:.10e}f;\n\n")
-        f.write("/* DET_H_SAIN : keep the existing value (entropy constant), not regenerated here. */\n")
+        f.write("/* Entropy constant (used only by rho_pred, not by z_max): keep the\n")
+        f.write("   existing firmware value; it does not affect the injection test. */\n")
+        f.write("#define DET_H_SAIN  2.4790663f\n\n")
         f.write("#endif /* DETECTOR_CONSTANTS_H */\n")
 
     with open("detector_params_n4096.json", "w") as f:
