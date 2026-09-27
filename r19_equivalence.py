@@ -9,6 +9,13 @@ segments. Reports:
   - DWT coefficient relative error (for the "+-0.5%" claim)
   - energy E_obs relative error
   - z-score absolute error (for the "+-0.001" claim)
+
+Measured results:
+  N=2048 (200 frozen CWRU segments): energy 2.6e-6, score 5.8e-6 (rel/abs).
+  N=4096 (531 CWRU healthy segments): energy 1.3e-6, score 1.8e-6 -- the value
+  used in the manuscript. The N=4096 figure is obtained by feeding 4096-length
+  CWRU segments (e.g. 97/98/99/100.mat, DE_time) through the same functions;
+  the precision is essentially N-independent.
 """
 
 import numpy as np
