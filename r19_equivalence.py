@@ -68,7 +68,7 @@ def energies_py(d):
 def main():
     import argparse
     ap = argparse.ArgumentParser(description="R1.9 numerical-equivalence test (C vs Python Haar DWT)")
-    ap.add_argument("--vectors", default=r"C:\Users\buisson\RHEOX-autonomous\projet_vibration\CM7\test_vectors.npz",
+    ap.add_argument("--vectors", default="test_vectors.npz",
                     help="path to test_vectors.npz (segments of float32)")
     ap.add_argument("--J", type=int, default=9, help="DWT levels")
     args = ap.parse_args()
